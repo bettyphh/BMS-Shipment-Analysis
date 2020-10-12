@@ -132,30 +132,46 @@ GROUP BY shipments.id,
          sd.planned_duration
 )
 
+-- Shipment_Created_TS
+-- count of total shipments by Shipment_Created_TS: day
+SELECT TO_DATE(Shipment_Created_TS) AS shipment_date, COUNT(DISTINCT OH_ID)
+FROM BMS_shipment_events
+GROUP BY 1
+ORDER BY 1
 
--- count of total shipments by day
-SELECT Shipment_Date_Created AS shipment_date, COUNT (DISTINCT OH_ID)
+
+-- count of total shipments by Shipment_Created_TS: week
+SELECT WEEK(Shipment_Created_TS) AS shipment_week, COUNT(DISTINCT OH_ID)
+FROM BMS_shipment_events
+GROUP BY 1
+ORDER BY 1
+
+
+-- count of total shipments by Shipment_Created_TS: month 
+SELECT MONTH(Shipment_Created_TS) AS shipment_month, COUNT(DISTINCT OH_ID)
 FROM BMS_shipment_events
 GROUP BY 1
 ORDER BY 1
 
 
 
-
--- count of total shipments by week: which date 
-SELECT WEEK(Shipment_Created_TS) AS shipment_week, COUNT (DISTINCT OH_ID)
+-- Delivery_Date
+-- count of total shipments by Delivery_Date: day
+SELECT TO_DATE(Delivery_TS) AS shipment_date, COUNT(DISTINCT OH_ID)
 FROM BMS_shipment_events
 GROUP BY 1
 ORDER BY 1
 
 
--- count of total shipments by month: which date 
-SELECT MONTH(Shipment_Created_TS) AS date_month, COUNT (DISTINCT OH_ID)
+-- count of total shipments by Delivery_Date: week
+SELECT WEEK(Delivery_TS) AS shipment_week, COUNT(DISTINCT OH_ID)
 FROM BMS_shipment_events
 GROUP BY 1
 ORDER BY 1
 
 
-
-
-
+-- count of total shipments by Delivery_Date: month 
+SELECT MONTH(Delivery_TS) AS shipment_month, COUNT(DISTINCT OH_ID)
+FROM BMS_shipment_events
+GROUP BY 1
+ORDER BY 1

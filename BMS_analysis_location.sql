@@ -138,12 +138,13 @@ ORDER BY 1
 
 
 
--- count of transport mode: any shipment event?
+-- count of total shipments by source: which source?
+
 
 
 
 -- count of total shipments by region: city, state? any time period?
-SELECT destination_location_id, address, COUNT (DISTINCT OH_ID)
+SELECT destination_location_id, address, COUNT(DISTINCT OH_ID)
 from BMS_shipment_events
 INNER JOIN locations 
 ON BMS_shipment_events.destination_location_id = locations.ID
@@ -152,7 +153,7 @@ ORDER BY 2
 
 
 -- count of total shipments by destination: name? any time period?
-SELECT city, state, COUNT (DISTINCT OH_ID)
+SELECT city, state, COUNT(DISTINCT OH_ID)
 from BMS_shipment_events
 INNER JOIN locations 
 ON BMS_shipment_events.destination_location_id = locations.ID
@@ -160,7 +161,8 @@ GROUP BY 1,2
 ORDER BY 2
 
 
--- count of total shipments by source: which source?
+
+-- count of transport mode: any shipment event?
 
 
 
