@@ -3,6 +3,7 @@
 
 
 -- shipment analysis from Brent
+--BMSDSVPilot: Portal 127
 WITH planned_shipment_duration (shipment_id, planned_duration)
      AS (SELECT ss.shipment_id,
                 Sum(duration)
@@ -137,22 +138,29 @@ GROUP BY shipments.id,
 ORDER BY 1
 
 
+-- count of total shipments by source: origin title
+SELECT Origin, COUNT(DISTINCT OH_ID)
+FROM BMS_shipment_events
+GROUP BY 1
 
--- count of total shipments by source: which source?
-
-
-
-
--- count of total shipments by region: city, state? any time period?
-SELECT destination_location_id, address, COUNT(DISTINCT OH_ID)
+ 
+-- count of total shipments by source: origin city, state
+SELECT city, state, COUNT(DISTINCT OH_ID)
 from BMS_shipment_events
 INNER JOIN locations 
-ON BMS_shipment_events.destination_location_id = locations.ID
+ON BMS_shipment_events.origin_location_id = locations.ID
 GROUP BY 1,2
 ORDER BY 2
 
 
--- count of total shipments by destination: name? any time period?
+
+-- count of total shipments by destination: destination title
+SELECT Destination, COUNT(DISTINCT OH_ID)
+FROM BMS_shipment_events
+GROUP BY 1
+
+
+-- count of total shipments by source: destination city, state
 SELECT city, state, COUNT(DISTINCT OH_ID)
 from BMS_shipment_events
 INNER JOIN locations 
@@ -162,8 +170,14 @@ ORDER BY 2
 
 
 
--- count of transport mode: any shipment event?
+-- count of total shipments by region: city, state? any time period?
 
+
+
+
+
+
+-- count of transport mode: any shipment event?
 
 
 

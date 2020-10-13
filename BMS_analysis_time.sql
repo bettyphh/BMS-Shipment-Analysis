@@ -3,6 +3,7 @@
 
 
 -- shipment analysis from Brent
+--BMSDSVPilot: Portal 127
 WITH planned_shipment_duration (shipment_id, planned_duration)
      AS (SELECT ss.shipment_id,
                 Sum(duration)
